@@ -1,6 +1,5 @@
 export const PersonsTable = (props) => (
-    <table border="1">
-
+    <table border={props.border}>
         <thead>
             <tr>
                 <th>First Name</th>
@@ -16,8 +15,8 @@ export const PersonsTable = (props) => (
                     <td>{team.lastName}</td>
                     <td><a target="_blank" href={team.gitHub}>Github</a></td>
                     <td>
-                        <a href="#" class="delete-row" data-id="{person.id}">&#10006;</a>
-                        <a href="#" class="edit-row" data-id="{person.id}">&#9998;</a>
+                        <a href="#" className="delete-row" data-id="{person.id}">&#10006;</a>
+                        <a href="#" className="edit-row" data-id="{person.id}">&#9998;</a>
                     </td>
                 </tr>
             ))}
