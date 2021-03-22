@@ -6,32 +6,29 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      teams: []
+      teams: [],
+      date: new Date().toString()
     }
   }
 
   componentDidMount() {
-    console.warn('mount');
-    setTimeout(() => {
-      console.warn('loaded');
+    setInterval(() => {
       this.setState({
-        teams: [
-          {
-            "id": "abcdef1610310163146",
-            "firstName": "Nic",
-            "lastName": "Matei",
-            "gitHub": "nmatei"
-          },
-          {
-            "id": "qhejbm1610993148257",
-            "firstName": "Cristian",
-            "lastName": "Cozma",
-            "gitHub": "CristiCozma"
-          }
-        ]
+        date: new Date().toString()
       })
-    }, 2000);
+    }, 60000);
 
+    this.load();
+  }
+
+  load() {
+    fetch("http://localhost:3000/teams-json")
+      .then(res => res.json())
+      .then(teams => {
+        this.setState({
+          teams
+        });
+      });
   }
 
   render() {
@@ -41,6 +38,7 @@ class App extends Component {
         <h1>Teams Networking</h1>
         <div>Search</div>
         <PersonsTable teams={this.state.teams} border={1} />
+        <div>{this.state.date}</div>
       </div>
     );
   }
