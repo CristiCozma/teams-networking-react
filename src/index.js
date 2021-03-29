@@ -6,21 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-const rootReducer = (state = { teams: [] }, action) => {
+const rootReducer = (state = { filter: "", teams: [] }, action) => {
   console.warn("rootReducer", state, action);
   switch (action.type) {
     case "TEAMS_LOADED": {
       return {
+        ...state,
         teams: action.teams,
       };
     }
     case "TEAM_ADDED": {
       return {
-        teams: state.teams.concat(action.team),
+        ...state,
+        teams: [...state.teams, action.team],
       };
     }
     case "TEAM_REMOVED": {
       return {
+        ...state,
         teams: state.teams.filter((team) => team.id != action.id),
       };
     }
